@@ -1,0 +1,48 @@
+ip ip-prefix PL-AS6500-V4 index 10 permit 192.165.5.0/24  24
+
+route-policy eBGP-DOWNSTREAM-ASN-AS6500-V4-IN permit node 100
+if-match ip-prefix PL-AS6500-V4
+apply local-preference 700
+apply community 1234:200 1234:243 1234:1023 1234:1043 additive
+
+------------------------------------------------------------------------------------------------
+ip ip-prefix PL-AS6501-V4 index 10 permit 192.165.7.0/24  24
+
+route-policy eBGP-DOWNSTREAM-ASN-AS6501-V4-IN permit node 100
+if-match ip-prefix PL-AS6501-V4
+apply local-preference 700
+apply community 1234:200 1234:243 1234:1023 1234:1043 additive
+
+------------------------------------------------------------------------------------------------
+ip ip-prefix PL-AS6502-V4 index 10 permit 192.165.8.0/24  24
+
+route-policy eBGP-DOWNSTREAM-ASN-AS6502-V4-IN permit node 100
+if-match ip-prefix PL-AS6502-V4
+apply local-preference 700
+apply community 1234:200 1234:243 1234:1023 1234:1043 additive
+
+------------------------------------------------------------------------------------------------
+ip ip-prefix PL-AS6503-V4 index 10 permit 192.165.9.0/24  24
+
+route-policy eBGP-DOWNSTREAM-ASN-AS6503-V4-IN permit node 100
+if-match ip-prefix PL-AS6503-V4
+apply local-preference 700
+apply community 1234:200 1234:243 1234:1023 1234:1043 additive
+
+------------------------------------------------------------------------------------------------
+ip ip-prefix PL-AS6504-V4 index 10 permit 192.165.10.0/24  24
+
+route-policy eBGP-DOWNSTREAM-ASN-AS6504-V4-IN permit node 100
+if-match ip-prefix PL-AS6504-V4
+apply local-preference 700
+apply community 1234:200 1234:243 1234:1023 1234:1043 additive
+
+------------------------------------------------------------------------------------------------
+ip ip-prefix PL-AS6505-V4 index 10 permit 192.165.10.0/24  24
+
+route-policy eBGP-DOWNSTREAM-ASN-AS6505-V4-IN permit node 100
+if-match ip-prefix PL-AS6505-V4
+apply local-preference 700
+apply community 1234:200 1234:243 1234:1023 1234:1043 additive
+
+------------------------------------------------------------------------------------------------
