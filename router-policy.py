@@ -21,8 +21,8 @@ def routepolicy(J):
     print('Junos OS')        
     print('Foram configuradas',count,'Routing Policy')
 
-def routemap(C):
-    arq = open('Cisco-Route-Map.txt','w')
+def routemap(C_XE):
+    arq = open('Cisco-XE-Route-Map.txt','w')
     count = 0
     file = open('asn-list.txt', 'r')
     t = []
@@ -40,6 +40,30 @@ def routemap(C):
                 print('------------------------------------------------------------------------------------------------',file=arq)
     print('Cisco IOS-XE')
     print('Foram configuradas',count,'Route Map')
+    
+def route_policy_xr(C_XR):
+    arq = open('Cisco-XR-Route-Policy.txt','w')
+    count = 0
+    file = open('asn-list.txt', 'r')
+    t = []
+    for line in file.readlines():
+        line = line.rstrip()
+        t.append(line)
+    for i in range(len(t)):
+           if 'AS' in t[i]:   
+                count = count + 1
+                print('prefix-set PL-{}-V4 \n'.format(t[i]),' {} ge 22 le 24'.format(t[i+1]),file=arq) 
+                print('end-set\n',file=arq)
+                print('route-policy eBGP-DOWNSTREAM-ASN-{}-V4-IN'.format(t[i]),file=arq)
+                print('  if destination in PL-{}-V4 then'.format(t[i]),file=arq)
+                print('    set local-preference 700',file=arq)
+                print('    set community COSTOMER-ISP additive',file=arq)
+                print('    set community EXPORT-ONLY-ISP2 additive',file=arq)
+                print('    done \n',' ''endif',file=arq)
+                print('------------------------------------------------------------------------------------------------',file=arq)
+    print('Cisco IOS-XR')
+    print('Foram configuradas',count,'Route Policy')
+
 
 def route_policy(H):
     arq = open('Huawei-Route-Policy.txt','w')
@@ -66,8 +90,9 @@ while opcao != 0:
     print('Escolha a Policy a ser configurada: ')
     print()
     print('1 - Juniper')
-    print('2 - Cisco')
-    print('3 - Huawei')
+    print('2 - Cisco-XE')
+    print('3 - Cisco-XR')
+    print('4 - Huawei')
     print('0 - Sair')
     print()
     opcao = int(input('Entre com o número da opção desejada: '))
@@ -75,9 +100,12 @@ while opcao != 0:
         J = ''
         routepolicy(J)
     elif (opcao == 2):
-        C = ''
-        routemap(C)
+        C_XE = ''
+        routemap(C_XE)
     elif (opcao == 3):
+        C_XR = ''
+        route_policy_xr(C_XR)
+    elif (opcao == 4):
         H = ''
         route_policy(H)
 
